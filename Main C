@@ -1,1 +1,44 @@
+#include <stdio.h>
 
+
+int main() {
+    int opcao;
+
+    do {
+        printf("\n=== Banco digital ===\n");
+        printf("1- Abrir banco\n");
+        printf("2- Historico do banco\n");
+        printf("3- Fechar o banco\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                printf("\n[Abrindo o banco...]\n");
+                
+                break;
+
+            case 2:
+                printf("\n[Abrindo o historico do banco...]\n");
+                break;
+
+            case 3:
+                printf("\nBANCO FECHADO!\n");
+                break;
+
+            default:
+                printf("\nOpcao invalida! Tente novamente.\n");
+                break;
+        }
+
+    } while (opcao != 3);
+    
+    
+    
+
+    return 0;
+}
+
+	
+	
+	
