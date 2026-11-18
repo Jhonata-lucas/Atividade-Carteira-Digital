@@ -12,14 +12,12 @@
 #define MAX_CONTAS 2
 #define MAX_HISTORICO 5
 
-/* Uma conta pertence a um cliente. */
 typedef struct {
     int numero;
     int tipo;
     float saldo;
 } Conta;
 
-/* Cada cliente guarda somente as cinco transacoes mais recentes. */
 typedef struct {
     char tipo;              /* D = deposito, S = saque, E = emprestimo */
     float valor;
@@ -46,12 +44,10 @@ typedef struct {
 void inicializarBanco(Banco *banco);
 int salvarBanco(Banco *banco);
 void liberarBanco(Banco *banco);
-
 void abrirBanco(Banco *banco);
 void fecharBanco(Banco *banco);
 void cadastrarCliente(Banco *banco);
-void depositar(Banco *banco);
-void sacar(Banco *banco);
+void movimentar(Banco *banco, char operacao);
 void solicitarEmprestimo(Banco *banco);
 void consultarHistorico(Banco *banco);
 void mostrarRelatorios(Banco *banco);
