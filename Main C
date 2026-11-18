@@ -1,43 +1,125 @@
-#include <stdio.h>
+#include "meu_banco.h"
 
-int main() {
-    int opcao;
+/* Le uma opcao e limpa o restante da linha digitada. */
+static char lerOpcao(void) {
+    char opcao;
+    int c;
+
+    printf("Escolha uma opcao: ");
+    scanf(" %c", &opcao);
+
+    while ((c = getchar()) != '\n' && c != EOF) {
+        /* Limpa o restante da entrada. */
+    }
+
+    return opcao;
+}
+
+/* Menu secundario com as demais operacoes do banco. */
+static void menuOutros(Banco *banco) {
+    char opcao;
 
     do {
-        printf("\n=== Banco digital ===\n");
-        printf("1- Abrir banco\n");
-        printf("2- Historico do banco\n");
-        printf("3- Fechar o banco\n");
-        printf("Escolha uma opcao: ");
-        scanf("%d", &opcao);
+        printf("\n========== OUTROS SERVICOS ==========\n");
+        printf("1 - Depositar\n");
+        printf("2 - Sacar\n");
+        printf("3 - Solicitar emprestimo\n");
+        printf("4 - Historico do banco\n");
+        printf("5 - Relatorios\n");
+        printf("6 - Sorteio Fibonacci\n");
+        printf("0 - Voltar ao menu principal\n");
+
+        opcao = lerOpcao();
 
         switch (opcao) {
-            case 1:
-                printf("\n[Abrindo o banco...]\n");
-                
+            case '1':
+                depositar(banco);
                 break;
 
-            case 2:
-                printf("\n[Abrindo o historico do banco...]\n");
+            case '2':
+                sacar(banco);
                 break;
 
-            case 3:
-                printf("\nBANCO FECHADO!\n");
+            case '3':
+                solicitarEmprestimo(banco);
+                break;
+
+            case '4':
+                consultarHistorico(banco);
+                break;
+
+            case '5':
+                mostrarRelatorios(banco);
+                break;
+
+            case '6':
+                realizarSorteio(banco);
+                break;
+
+            case '0':
+                printf("Voltando ao menu principal...\n");
                 break;
 
             default:
-                printf("\nOpcao invalida! Tente novamente.\n");
-                break;
+                printf("Opcao invalida. Tente novamente.\n");
         }
 
-    } while (opcao != 3);
-    
-    
-    
-
-    return 0;
+    } while (opcao != '0');
 }
 
-	
-	
-	
+int main(void) {
+    Banco banco;
+    char opcao;
+    int sair = 0;
+
+    srand((unsigned int)time(NULL));
+    inicializarBanco(&banco);
+
+    do {
+        printf("\n========== BANCO DIGITAL ==========\n");
+        printf("Estado: %s\n", banco.aberto ? "ABERTO" : "FECHADO");
+        printf("1 - Abrir banco\n");
+        printf("2 - Fechar banco\n");
+        printf("3 - Cadastrar cliente\n");
+        printf("4 - Outros\n");
+        printf("5 - Sair\n");
+
+        opcao = lerOpcao();
+
+        switch (opcao) {
+            case '1':
+                abrirBanco(&banco);
+                break;
+
+            case '2':
+                fecharBanco(&banco);
+                break;
+
+            case '3':
+                cadastrarCliente(&banco);
+                break;
+
+            case '4':
+                menuOutros(&banco);
+                break;
+
+            case '5':
+            case 's':
+            case 'S':
+                if (salvarBanco(&banco, ARQUIVO_BANCO)) {
+                    printf("Dados salvos. Encerrando o banco digital.\n");
+                } else {
+                    printf("Aviso: nao foi possivel salvar os dados.\n");
+                }
+                sair = 1;
+                break;
+
+            default:
+                printf("Opcao invalida. Tente novamente.\n");
+        }
+
+    } while (!sair);
+
+    liberarBanco(&banco);
+    return 0;
+}
