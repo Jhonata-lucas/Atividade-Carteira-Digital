@@ -1,5 +1,3 @@
-ASSINATURAS DAS FUN
-
 #ifndef MEU_BANCO_H
 #define MEU_BANCO_H
 
@@ -8,21 +6,20 @@ ASSINATURAS DAS FUN
 #include <string.h>
 #include <time.h>
 
-#define MAX_CONTAS 2
-#define MAX_HISTORICO 5
-#define TAM_NOME 50
-#define ARQUIVO_BANCO "banco.dat"
-
 #define CORRENTE 1
 #define SALARIO 2
 #define POUPANCA 3
+#define MAX_CONTAS 2
+#define MAX_HISTORICO 5
 
+/* Uma conta pertence a um cliente. */
 typedef struct {
     int numero;
     int tipo;
     float saldo;
 } Conta;
 
+/* Cada cliente guarda somente as cinco transacoes mais recentes. */
 typedef struct {
     char tipo;              /* D = deposito, S = saque, E = emprestimo */
     float valor;
@@ -31,7 +28,7 @@ typedef struct {
 } Transacao;
 
 typedef struct {
-    char cliente[TAM_NOME];
+    char cliente[50];
     Conta contas[MAX_CONTAS];
     int quantidadeContas;
     Transacao historico[MAX_HISTORICO];
@@ -46,22 +43,18 @@ typedef struct {
     int aberto;
 } Banco;
 
-/* Inicializacao, memoria e arquivos */
 void inicializarBanco(Banco *banco);
+int salvarBanco(Banco *banco);
 void liberarBanco(Banco *banco);
-int carregarBanco(Banco *banco, const char *nomeArquivo);
-int salvarBanco(const Banco *banco, const char *nomeArquivo);
 
-/* Menu e operacoes */
 void abrirBanco(Banco *banco);
 void fecharBanco(Banco *banco);
 void cadastrarCliente(Banco *banco);
 void depositar(Banco *banco);
 void sacar(Banco *banco);
 void solicitarEmprestimo(Banco *banco);
-void consultarHistorico(const Banco *banco);
-void mostrarRelatorios(const Banco *banco);
-void realizarSorteio(const Banco *banco);
-int proximoFibonacci(int anterior, int atual, int modulo);
+void consultarHistorico(Banco *banco);
+void mostrarRelatorios(Banco *banco);
+void realizarSorteio(Banco *banco);
 
 #endif
