@@ -223,7 +223,7 @@ void realizarSorteio(Banco *banco) {
         return;
     }
 
-    /* Seleciona os cinco MAIORES saldos do banco. Todos precisam ter titulo. */
+    /* Seleciona os cinco e tem q ter o ti */
     int melhores[5] = {-1, -1, -1, -1, -1};
     for (int i = 0; i < banco->quantidadeClientes; i++) {
         int pos = 0;
