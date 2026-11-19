@@ -32,7 +32,7 @@ void registrarTransacao(Cliente *cliente, Conta *conta, char op, float valor) {
     t->data = time(NULL);
 }
 
-/* Arquivo binario: quantidade, proximo numero e vetor de clientes. */
+/* Arquivo bi: quantidade, proximo numero e vetor de clientes. */
 void inicializarBanco(Banco *banco) {
     banco->clientes = NULL;
     banco->quantidadeClientes = 0;
