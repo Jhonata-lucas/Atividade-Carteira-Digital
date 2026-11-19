@@ -274,7 +274,7 @@ void realizarSorteio(Banco *banco) {
         }
     }
 
-    /* PDF pede um contemplado. Preferencia: 1o, depois 2o, depois 3o. */
+    /* Preferencia: 1o, depois 2o, depois 3o. */
     int vencedor = primeiro != -1 ? primeiro : (segundo != -1 ? segundo : terceiro);
     if (vencedor == -1) {
         printf("Nenhum participante atendeu aos criterios do sorteio.\n");
@@ -311,7 +311,7 @@ void sacar(Cliente *c, Conta *conta) {
     printf("Valor do saque: R$ ");
     scanf("%f", &valor);
     if (valor <= 0) { printf("Valor invalido.\n"); return; }
-    /* A conta corrente pode ficar negativa, pois o PDF exige esse alerta. */
+    /* A conta corrente pode ficar negativa */
     if (conta->tipo != CORRENTE && valor > conta->saldo) {
         printf("Saldo insuficiente.\n");
         return;
