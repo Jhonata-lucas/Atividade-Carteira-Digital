@@ -242,7 +242,7 @@ void realizarSorteio(Banco *banco) {
         }
     }
 
-    /* Cada participante informa seu numero, como no exercicio da aula.
+    /* Cada participante informa seu numero
        Limite de 10 evita estouro do fatorial em int. */
     int resultado[5], primeiro = -1, segundo = -1, terceiro = -1;
     float media = 0;
